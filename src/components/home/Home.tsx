@@ -1,4 +1,4 @@
-import { useAppSelector } from '##/app/hooks'
+import { useAppSelector } from '#A/hooks'
 import './Home.css'
 import logo from './logo.svg'
 
