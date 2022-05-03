@@ -1,0 +1,8 @@
+.App {
+  div.linked {
+    padding: 4px;
+    & > a {
+      margin: 4px 6px;
+    }
+  }
+}

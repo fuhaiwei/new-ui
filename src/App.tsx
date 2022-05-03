@@ -1,7 +1,7 @@
 import Demo from '#C/demo/Demo'
 import Home from '#C/home/Home'
 import { NavLink, Route, Routes } from 'react-router-dom'
-import './App.css'
+import './App.scss'
 
 function App() {
   return (
