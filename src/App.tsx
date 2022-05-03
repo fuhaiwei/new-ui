@@ -1,58 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { useNav } from '#A/hooks'
+import Demo from '#C/demo/Demo'
+import Home from '#C/home/Home'
+import { Layout, Menu } from 'antd'
+import { Content, Header } from 'antd/lib/layout/layout'
+import { ItemType } from 'antd/lib/menu/hooks/useItems'
+import { MenuInfo } from 'rc-menu/lib/interface'
+import { Route, Routes } from 'react-router-dom'
+import './App.scss'
+
+const items: ItemType[] = [
+  { key: '/', label: 'Home' },
+  { key: '/demo', label: 'Demo' },
+]
 
 function App() {
+  const { pathname, navigate } = useNav()
+  const onClick = ({ key, domEvent }: MenuInfo) => {
+    if (domEvent.ctrlKey) {
+      window.open(key)
+    } else {
+      navigate(key)
+    }
+  }
+  console.log(`render: App, key=${pathname}`)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+      <Layout>
+        <Layout>
+          <Header style={{ background: 'white' }}>
+            <Menu onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
+          </Header>
+          <Content>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/demo" element={<Demo />} />
+            </Routes>
+          </Content>
+        </Layout>
+      </Layout>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
