@@ -2,6 +2,7 @@ import { useNav } from '#A/hooks'
 import Demo from '#P/demo/Demo'
 import { Groups } from '#P/group/Group'
 import Home from '#P/home/Home'
+import NotFound from '#P/NotFound'
 import {
   createFromIconfontCN,
   GithubOutlined,
@@ -65,6 +66,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/demo" element={<Demo />} />
               <Route path="/groups" element={<Groups />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Content>
         </Layout>
