@@ -34,6 +34,7 @@ export function Groups() {
     <div className="Groups">
       <MyHeader
         title="推荐列表"
+        error={error}
         loading={loading}
         refresh={refresh}
         extra={
@@ -44,7 +45,6 @@ export function Groups() {
           </Radio.Group>
         }
       />
-      {error && <Alert message={`${error.name}:${error.message}`} />}
       <ViewGroups groups={groups} />
     </div>
   )
