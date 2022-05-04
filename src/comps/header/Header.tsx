@@ -16,18 +16,18 @@ export function MyHeader(props: Props) {
     </Button>
   )
   return (
-    <PageHeader
-      onBack={defaultOnBack}
-      extra={
-        <>
-          {button}
-          {extra}
-        </>
-      }
-      {...other}
-    >
+    <div className="MyHeader">
+      <PageHeader
+        onBack={defaultOnBack}
+        extra={
+          <>
+            {button}
+            {extra}
+          </>
+        }
+        {...other}
+      />
       {error && <Alert type="error" message={`${error.name}: ${error.message}`} />}
-      {children}
-    </PageHeader>
+    </div>
   )
 }
