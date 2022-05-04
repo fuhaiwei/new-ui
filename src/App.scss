@@ -1,10 +1,13 @@
 @import '~antd/dist/antd.css';
 
 .App {
-  div.linked {
-    padding: 4px;
-    & > a {
-      margin: 4px 6px;
+  main.ant-layout-content {
+    margin: 8px 0;
+    padding: 0 8px;
+
+    @media screen and (max-width: 600px) {
+      margin: 4px 0;
+      padding: 0 4px;
     }
   }
 }

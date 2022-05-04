@@ -19,9 +19,10 @@
     "baseUrl": "./",
     "paths": {
       "#A/*": ["src/app/*"],
-      "#B/*": ["src/features/*"],
-      "#C/*": ["src/components/*"],
-      "#H/*": ["src/hooks/*"]
+      "#C/*": ["src/comps/*"],
+      "#F/*": ["src/feats/*"],
+      "#H/*": ["src/hooks/*"],
+      "#P/*": ["src/pages/*"]
     }
   },
   "include": ["src"]

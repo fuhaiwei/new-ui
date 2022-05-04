@@ -1,4 +1,4 @@
-import { Counter } from '#B/counter/Counter'
+import { Counter } from '#F/counter/Counter'
 import './Demo.css'
 import logo from './logo.svg'
 

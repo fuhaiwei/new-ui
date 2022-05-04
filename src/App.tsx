@@ -1,7 +1,7 @@
 import { useNav } from '#A/hooks'
-import Demo from '#C/demo/Demo'
-import Groups from '#C/group/Group'
-import Home from '#C/home/Home'
+import Demo from '#P/demo/Demo'
+import Groups from '#P/group/Group'
+import Home from '#P/home/Home'
 import {
   createFromIconfontCN,
   GithubOutlined,
@@ -11,8 +11,7 @@ import {
 import { Layout, Menu } from 'antd'
 import { Content, Header } from 'antd/lib/layout/layout'
 import { ItemType } from 'antd/lib/menu/hooks/useItems'
-import { MenuInfo } from 'rc-menu/lib/interface'
-import { Route, Routes } from 'react-router-dom'
+import { NavLink, Route, Routes } from 'react-router-dom'
 import './App.scss'
 
 const IconFont = createFromIconfontCN({
@@ -35,22 +34,31 @@ const items: ItemType[] = [
   } as any,
 ]
 
-function App() {
-  const { pathname, navigate } = useNav()
-  const onClick = ({ key, domEvent }: MenuInfo) => {
-    if (key.startsWith('http') || domEvent.ctrlKey) {
-      window.open(key)
-    } else {
-      navigate(key)
-    }
+function addNavLink(item: any) {
+  if (item.children) {
+    item.children.forEach(addNavLink)
+  } else if (item.key.startsWith('http')) {
+    item.label = (
+      <a href={item.key} target="_blank" rel="noopener noreferrer">
+        {item.label}
+      </a>
+    )
+  } else {
+    item.label = <NavLink to={item.key}>{item.label}</NavLink>
   }
+}
+
+items.forEach(addNavLink)
+
+function App() {
+  const { pathname } = useNav()
   console.log(`render: App, key=${pathname}`)
   return (
     <div className="App">
       <Layout>
         <Layout>
           <Header style={{ background: 'white' }}>
-            <Menu onClick={onClick} selectedKeys={[pathname]} mode="horizontal" items={items} />
+            <Menu selectedKeys={[pathname]} mode="horizontal" items={items} />
           </Header>
           <Content style={{ background: 'white' }}>
             <Routes>

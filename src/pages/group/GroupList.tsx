@@ -1,61 +1,54 @@
-import { useResult } from '#A/hooks'
-import { Column, Table } from '#B/@table/Table'
+import { Column, Table } from '#C/table/Table'
 import { EditOutlined, UnorderedListOutlined } from '@ant-design/icons'
 import { Button, PageHeader } from 'antd'
 import { Link } from 'react-router-dom'
+import { IGroup } from './Group'
 
-export interface IGroup {
-  id: number
-  key: string
-  title: string
-  enabled: boolean
-  viewType: string
-  discCount: number
-  modifyTime: number
+const cols = getCols()
+
+interface Props {
+  groups?: IGroup[]
+  refresh: () => void
 }
 
-const cols: Column<IGroup>[] = [
-  {
-    key: 'idx',
-    title: '#',
-    format: (_, idx) => idx + 1,
-  },
-  {
-    key: 'title',
-    title: '列表标题',
-    format: formatLinkedTitle,
-  },
-  {
-    key: 'update',
-    title: '最后更新',
-    format: formatLastUpdate,
-  },
-  {
-    key: 'edit',
-    title: '编辑列表',
-    format: formatEdit,
-  },
-  {
-    key: 'item',
-    title: '增减碟片',
-    format: formatItem,
-  },
-]
-
-function findAll() {
-  return fetch('/api/discGroups')
-}
-
-export default function Groups() {
-  const [groups, refresh] = useResult<IGroup[]>(findAll)
-  const extra = <Button onClick={refresh}>刷新</Button>
-  console.log(`render: Groups, groups: ${groups !== undefined}`)
+export default function ViewGroups(props: Props) {
+  const { groups, refresh } = props
+  console.log(`render: GroupList`)
   return (
     <div className="GroupList">
-      <PageHeader title="推荐列表" extra={extra} onBack={() => window.history.back()} />
+      <PageHeader
+        title="推荐列表"
+        extra={<Button onClick={refresh}>刷新</Button>}
+        onBack={() => window.history.back()}
+      />
       {groups && <Table rows={groups} cols={cols} />}
     </div>
   )
+}
+
+function getCols(): Column<IGroup>[] {
+  return [
+    {
+      key: 'title',
+      title: '列表标题',
+      format: formatLinkedTitle,
+    },
+    {
+      key: 'update',
+      title: '最后更新',
+      format: formatLastUpdate,
+    },
+    {
+      key: 'edit',
+      title: '编辑列表',
+      format: formatEdit,
+    },
+    {
+      key: 'item',
+      title: '增减碟片',
+      format: formatItem,
+    },
+  ]
 }
 
 function formatLinkedTitle(row: IGroup) {
