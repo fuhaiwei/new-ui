@@ -1,7 +1,7 @@
 import { Alert, Button, PageHeader, PageHeaderProps } from 'antd'
 
 interface Props extends PageHeaderProps {
-  error?: Error
+  error?: { name: string; message: string }
   loading?: boolean
   refresh?: () => void
 }
