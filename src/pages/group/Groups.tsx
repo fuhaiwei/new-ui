@@ -1,5 +1,6 @@
 import { Table } from 'antd'
 import Column from 'antd/lib/table/Column'
+import dayjs from 'dayjs'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { IGroup } from './Group'
@@ -17,6 +18,7 @@ function ViewGroups(props: Props) {
     <div className="ViewGroups">
       <Table dataSource={groups}>
         <Column key="title" title="列表标题" render={renderTitle} />
+        <Column key="updateOn" title="更新时间" render={renderUpdateOn} />
       </Table>
     </div>
   )
@@ -34,4 +36,14 @@ function renderTitle(row: IGroup) {
 
 function getJustColor(time?: number) {
   return time && Date.now() - time < 3600_000 ? '#FF0000' : '#C67532'
+}
+
+function renderUpdateOn(row: IGroup) {
+  if (row.enabled === false) {
+    return '停止更新'
+  }
+  if (row.modifyTime === undefined) {
+    return '从未更新'
+  }
+  return dayjs(row.modifyTime).fromNow()
 }
