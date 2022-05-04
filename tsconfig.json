@@ -15,12 +15,14 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "downlevelIteration": true,
     "baseUrl": "./",
     "paths": {
-      "##/*": ["src/*"],
       "#A/*": ["src/app/*"],
-      "#B/*": ["src/features/*"],
-      "#C/*": ["src/components/*"]
+      "#C/*": ["src/comps/*"],
+      "#F/*": ["src/feats/*"],
+      "#H/*": ["src/hooks/*"],
+      "#P/*": ["src/pages/*"]
     }
   },
   "include": ["src"]
