@@ -1,6 +1,6 @@
-import { useResult } from '#A/hooks'
-import { useSessionStorageState } from 'ahooks'
-import { Button, PageHeader, Radio } from 'antd'
+import { fetchResult } from '#H/UseResult'
+import { useRequest, useSessionStorageState } from 'ahooks'
+import { Alert, Button, PageHeader, Radio } from 'antd'
 import { useCallback } from 'react'
 import ViewGroups from './Groups'
 
@@ -19,21 +19,26 @@ export function findAll(value: string) {
   let hasPrivate = false
   if (value !== '1') hasDisable = true
   if (value === '3') hasPrivate = true
-  return fetch(`/api/discGroups?hasDisable=${hasDisable}&hasPrivate=${hasPrivate}`)
+  return fetchResult<IGroup[]>(`/api/discGroups?hasDisable=${hasDisable}&hasPrivate=${hasPrivate}`)
 }
 
 export function Groups() {
   const [value, setValue] = useSessionStorageState('groups-value', { defaultValue: '1' })
-  const fetcher = useCallback(() => findAll(value), [value])
-  const [groups, refresh] = useResult<IGroup[]>(fetcher)
-  console.log(`render: Groups, groups: ${groups !== undefined}`)
+  const { loading, error, data, refresh } = useRequest(() => findAll(value), {
+    refreshDeps: [value],
+    refreshOnWindowFocus: true,
+  })
+  const groups = data?.data
+  console.log(`render: Groups, loading: ${loading}`)
   return (
     <div className="Groups">
       <PageHeader
         title="推荐列表"
         extra={
           <>
-            <Button onClick={refresh}>刷新</Button>
+            <Button loading={loading} onClick={refresh}>
+              刷新
+            </Button>
             <Radio.Group value={value} onChange={(e) => setValue(e.target.value)}>
               <Radio value="1">仅推荐</Radio>
               <Radio value="2">含备份</Radio>
@@ -43,6 +48,7 @@ export function Groups() {
         }
         onBack={() => window.history.back()}
       />
+      {error && <Alert message={`${error.name}:${error.message}`} />}
       <ViewGroups groups={groups} />
     </div>
   )

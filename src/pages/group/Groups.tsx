@@ -1,5 +1,6 @@
 import { Table } from 'antd'
 import Column from 'antd/lib/table/Column'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import { IGroup } from './Group'
 
@@ -7,7 +8,9 @@ interface Props {
   groups?: IGroup[]
 }
 
-export default function ViewGroups(props: Props) {
+export default React.memo(ViewGroups)
+
+function ViewGroups(props: Props) {
   const { groups } = props
   console.log(`render: ViewGroups, groups: ${groups !== undefined}`)
   return (

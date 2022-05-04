@@ -13,5 +13,3 @@ export const useNav = () => {
     navigate,
   }
 }
-
-export * from '#H/UseResult'
