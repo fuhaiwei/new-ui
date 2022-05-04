@@ -3,7 +3,7 @@ import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IGroup } from './Group'
+import { IGroup } from './service'
 
 interface Props {
   groups?: IGroup[]

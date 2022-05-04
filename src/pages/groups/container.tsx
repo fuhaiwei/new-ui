@@ -1,26 +1,8 @@
 import { MyHeader } from '#C/header/Header'
-import { fetchResult } from '#H/UseResult'
 import { useRequest, useSessionStorageState } from 'ahooks'
-import { Alert, Radio } from 'antd'
-import ViewGroups from './Groups'
-
-export interface IGroup {
-  id: number
-  key: string
-  title: string
-  enabled: boolean
-  viewType: string
-  discCount: number
-  modifyTime?: number
-}
-
-export function findAll(value: string) {
-  let hasDisable = false
-  let hasPrivate = false
-  if (value !== '1') hasDisable = true
-  if (value === '3') hasPrivate = true
-  return fetchResult<IGroup[]>(`/api/discGroups?hasDisable=${hasDisable}&hasPrivate=${hasPrivate}`)
-}
+import { Radio } from 'antd'
+import { findAll } from './service'
+import ViewGroups from './view'
 
 export function Groups() {
   const [value, setValue] = useSessionStorageState('groups-value', { defaultValue: '1' })
