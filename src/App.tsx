@@ -1,6 +1,6 @@
 import { useNav } from '#A/hooks'
 import Demo from '#P/demo/Demo'
-import Groups from '#P/group/Group'
+import { Groups } from '#P/group/Group'
 import Home from '#P/home/Home'
 import {
   createFromIconfontCN,
