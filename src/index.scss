@@ -15,4 +15,14 @@
   .ant-table {
     margin: 8px 0;
   }
+  .ant-space.row-stretch {
+    align-items: stretch;
+    .ant-card {
+      height: 100%;
+    }
+  }
+  .ant-radio-group {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
