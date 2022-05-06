@@ -3,7 +3,7 @@ import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { IGroup } from './Group'
+import { IGroup } from './service'
 
 interface Props {
   groups?: IGroup[]
@@ -16,7 +16,7 @@ function ViewGroups(props: Props) {
   console.log(`render: ViewGroups, groups: ${groups !== undefined}`)
   return (
     <div className="ViewGroups">
-      <Table dataSource={groups}>
+      <Table dataSource={groups} pagination={{ position: ['bottomLeft'] }}>
         <Column key="title" title="列表标题" render={renderTitle} />
         <Column key="updateOn" title="更新时间" render={renderUpdateOn} />
       </Table>

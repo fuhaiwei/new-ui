@@ -1,33 +1,37 @@
-import { Alert, Button, PageHeader, PageHeaderProps } from 'antd'
+import { Alert, Button, PageHeader, PageHeaderProps, Space } from 'antd'
 
-interface Props extends PageHeaderProps {
+const defaultOnBack = () => window.history.back()
+
+interface State {
   error?: { name: string; message: string }
   loading?: boolean
   refresh?: () => void
 }
 
-const defaultOnBack = () => window.history.back()
+interface Props extends PageHeaderProps {
+  state?: State
+  error?: { name: string; message: string }
+  loading?: boolean
+  refresh?: () => void
+}
 
 export function MyHeader(props: Props) {
-  const { error, loading, refresh, children, extra, ...other } = props
-  const button = refresh && (
-    <Button loading={loading} onClick={refresh}>
-      刷新
-    </Button>
+  const { state, title, ...other } = props
+  const { error, loading, refresh } = state ?? props
+  const lastTitle = (
+    <Space>
+      {title}
+      {refresh && (
+        <Button loading={loading} onClick={refresh}>
+          刷新
+        </Button>
+      )}
+    </Space>
   )
   return (
-    <PageHeader
-      onBack={defaultOnBack}
-      extra={
-        <>
-          {button}
-          {extra}
-        </>
-      }
-      {...other}
-    >
+    <div className="MyHeader">
+      <PageHeader title={lastTitle} onBack={defaultOnBack} {...other} />
       {error && <Alert type="error" message={`${error.name}: ${error.message}`} />}
-      {children}
-    </PageHeader>
+    </div>
   )
 }

@@ -1,28 +1,33 @@
 import { useNav } from '#A/hooks'
-import Demo from '#P/demo/Demo'
-import { Groups } from '#P/group/Group'
-import Home from '#P/home/Home'
+import { sessionQuery } from '#F/session/slice'
+import { Console } from '#P/console/container'
+import { Groups } from '#P/groups/container'
 import NotFound from '#P/notfound/NotFound'
+import { Session } from '#P/session/container'
+import { Users } from '#P/users/container'
 import {
+  BarChartOutlined,
   createFromIconfontCN,
   GithubOutlined,
-  HomeOutlined,
-  PlayCircleOutlined,
+  UserOutlined,
 } from '@ant-design/icons'
 import { Layout, Menu } from 'antd'
 import { Content, Header } from 'antd/lib/layout/layout'
 import { ItemType } from 'antd/lib/menu/hooks/useItems'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
 import './App.scss'
+import { appDispatch } from './store'
 
 const IconFont = createFromIconfontCN({
   scriptUrl: 'https://at.alicdn.com/t/font_565515_1amye10w3sh.js',
 })
 
 const items: ItemType[] = [
-  { label: 'Home', icon: <HomeOutlined />, key: '/' },
-  { label: 'Demo', icon: <PlayCircleOutlined />, key: '/demo' },
   { label: 'Groups', icon: <IconFont type="icon-yinghua" />, key: '/groups' },
+  { label: 'Session', icon: <UserOutlined />, key: '/session' },
+  { label: 'Console', icon: <BarChartOutlined />, key: '/console' },
+  { label: 'Users', icon: <UserOutlined />, key: '/users' },
   {
     label: 'Source',
     icon: <GithubOutlined />,
@@ -53,7 +58,9 @@ items.forEach(addNavLink)
 
 function App() {
   const { pathname } = useNav()
-  console.log(`render: App, key=${pathname}`)
+  useEffect(() => {
+    appDispatch(sessionQuery())
+  }, [])
   return (
     <div className="App">
       <Layout>
@@ -63,9 +70,13 @@ function App() {
           </Header>
           <Content style={{ background: 'white' }}>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/demo" element={<Demo />} />
+              <Route path="/" element={<Navigate to="/groups" />} />
+              <Route path="/users" element={<Users />} />
               <Route path="/groups" element={<Groups />} />
+              <Route path="/session" element={<Session />} />
+              <Route path="/console" element={<Console />}>
+                <Route path=":name" />
+              </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Content>
