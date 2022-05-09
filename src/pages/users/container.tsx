@@ -18,6 +18,7 @@ export function Users() {
   const [search, setSearch] = useUrlState<Search>()
   const { data, ...state } = useRequest(() => findAll(search), { refreshDeps: [search] })
   const { data: users, page } = data ?? {}
+  console.log(`render Users: users=${users !== undefined}`)
   return (
     <div className="Users">
       <MyHeader state={state} title="Users" />

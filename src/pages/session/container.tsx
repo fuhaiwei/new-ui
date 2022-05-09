@@ -5,6 +5,7 @@ import { Profile } from './view-profile'
 
 export function Session() {
   const session = useAppSelector((state) => state.session)
+  console.log(`render Session: user=${session.userName}`)
   return (
     <div className="Session">
       <Space className="row-stretch">

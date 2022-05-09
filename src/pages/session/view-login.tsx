@@ -7,7 +7,6 @@ import { postRegister } from './service'
 
 export function Login() {
   const [onLogin, setOnLogin] = useState(true)
-
   const onFinish = (values: any) => {
     const encode = encodePassword(values.username, values.password)
     const form = { ...values, password: encode }
@@ -17,11 +16,10 @@ export function Login() {
       postRegister(form)
     }
   }
-
   const onFinishFailed = () => {
     Modal.warn({ title: 'Verification failed', content: 'Please check the form' })
   }
-
+  console.log(`render Login: onLogin=${onLogin}`)
   return (
     <Card title={onLogin ? 'Login' : 'Register'} style={{ width: 320 }}>
       <Form

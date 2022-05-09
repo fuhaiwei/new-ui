@@ -8,13 +8,17 @@ import { findCurrnet } from './service'
 
 export function Profile() {
   const { data: user, error } = useRequest(findCurrnet)
-  const extra = (
-    <Button type="link" onClick={() => appDispatch(sessionLogout())}>
-      Logout
-    </Button>
-  )
+  console.log(`render Profile: user=${user !== undefined}`)
   return (
-    <Card title="Profile" extra={extra} style={{ width: 320 }}>
+    <Card
+      title="Profile"
+      style={{ width: 320 }}
+      extra={
+        <Button type="link" onClick={() => appDispatch(sessionLogout())}>
+          Logout
+        </Button>
+      }
+    >
       {error && <Alert type="error" message={`${error.name}: ${error.message}`} />}
       {user && (
         <>

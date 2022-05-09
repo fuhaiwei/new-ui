@@ -6,12 +6,11 @@ import ViewGroups from './view'
 
 export function Groups() {
   const [value, setValue] = useSessionStorageState('groups-value', { defaultValue: '1' })
-  const { data, ...state } = useRequest(() => findAll(value), {
+  const { data: groups, ...state } = useRequest(() => findAll(value), {
     refreshDeps: [value],
     refreshOnWindowFocus: true,
   })
-  const groups = data?.data
-  console.log(`render: Groups, loading: ${state.loading}`)
+  console.log(`render: Groups, groups=${groups !== undefined}`)
   return (
     <div className="Groups">
       <MyHeader

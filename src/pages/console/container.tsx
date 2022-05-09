@@ -2,7 +2,7 @@ import { useNav } from '#A/hooks'
 import { MyCheckbox } from '#C/checkbox/Checkbox'
 import { MyHeader } from '#C/header/Header'
 import { MyPagination } from '#C/pagination/Pagination'
-import { useSerach } from '#H/useSearch'
+import { useSerach } from '#H/use-search'
 import { useRequest } from 'ahooks'
 import { Radio, Space, Table } from 'antd'
 import Column from 'antd/lib/table/Column'
@@ -19,13 +19,11 @@ export function Console() {
   const { data, ...state } = useRequest(() => findAll(name, search), {
     refreshDeps: [name, search],
   })
-  const msgs = data?.data
-  const page = data?.page
-
+  const { data: msgs, page } = data || {}
   const onChange = (page: number, size: number = 20) => {
     setSearch({ page, size })
   }
-
+  console.log(`render Console: msgs=${msgs !== undefined}`)
   return (
     <div className="Console">
       <MyHeader

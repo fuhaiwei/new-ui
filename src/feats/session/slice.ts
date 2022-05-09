@@ -1,4 +1,4 @@
-import { fetchResult } from '#H/UseResult'
+import { fetchResult } from '#H/use-result'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { message } from 'antd'
 

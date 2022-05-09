@@ -61,6 +61,7 @@ function App() {
   useEffect(() => {
     appDispatch(sessionQuery())
   }, [])
+  console.log(`render App: pathname=${pathname}`)
   return (
     <div className="App">
       <Layout>

@@ -1,4 +1,4 @@
-import { Page } from '#H/UseResult'
+import { Page } from '#H/use-result'
 import { Pagination } from 'antd'
 import { useCallback } from 'react'
 
