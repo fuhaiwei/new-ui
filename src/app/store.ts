@@ -7,7 +7,7 @@ export const store = configureStore({
   },
 })
 
-export const appDispatch = store.dispatch
+export const call = store.dispatch
 export type AppDispatch = typeof store.dispatch
 export type RootState = ReturnType<typeof store.getState>
 export type AppThunk<ReturnType = void> = ThunkAction<

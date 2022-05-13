@@ -1,8 +1,10 @@
 import { useNav } from '#A/hooks'
+import { call } from '#A/store'
 import { sessionQuery } from '#F/session/slice'
+import { useOnceService } from '#H/use-once'
 import { Console } from '#P/console/container'
 import { Groups } from '#P/groups/container'
-import NotFound from '#P/notfound/NotFound'
+import { NotFound } from '#P/notfound/NotFound'
 import { Session } from '#P/session/container'
 import { Users } from '#P/users/container'
 import {
@@ -11,13 +13,12 @@ import {
   GithubOutlined,
   UserOutlined,
 } from '@ant-design/icons'
+import { useWhyDidYouUpdate } from 'ahooks'
 import { Layout, Menu } from 'antd'
 import { Content, Header } from 'antd/lib/layout/layout'
 import { ItemType } from 'antd/lib/menu/hooks/useItems'
-import { useEffect } from 'react'
-import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
+import { Link, Navigate, Route, Routes } from 'react-router-dom'
 import './App.scss'
-import { appDispatch } from './store'
 
 const IconFont = createFromIconfontCN({
   scriptUrl: 'https://at.alicdn.com/t/font_565515_1amye10w3sh.js',
@@ -38,30 +39,14 @@ const items: ItemType[] = [
       { label: 'Github - Admin', key: 'https://github.com/mingzuozhibi/mzzb-admin' },
     ],
   } as any,
-]
+].map(defindItem)
 
-function addNavLink(item: any) {
-  if (item.children) {
-    item.children.forEach(addNavLink)
-  } else if (item.key.startsWith('http')) {
-    item.label = (
-      <a href={item.key} target="_blank" rel="noopener noreferrer">
-        {item.label}
-      </a>
-    )
-  } else {
-    item.label = <NavLink to={item.key}>{item.label}</NavLink>
-  }
-}
-
-items.forEach(addNavLink)
+const service = () => call(sessionQuery())
 
 function App() {
   const { pathname } = useNav()
-  useEffect(() => {
-    appDispatch(sessionQuery())
-  }, [])
-  console.log(`render App: pathname=${pathname}`)
+  useOnceService(service, [])
+  useWhyDidYouUpdate('App', { pathname })
   return (
     <div className="App">
       <Layout>
@@ -76,7 +61,7 @@ function App() {
               <Route path="/groups" element={<Groups />} />
               <Route path="/session" element={<Session />} />
               <Route path="/console" element={<Console />}>
-                <Route path=":name" />
+                <Route path=":name" element={null} />
               </Route>
               <Route path="*" element={<NotFound />} />
             </Routes>
@@ -88,3 +73,18 @@ function App() {
 }
 
 export default App
+
+function defindItem(item: any) {
+  if (item.children) {
+    item.children.forEach(defindItem)
+  } else if (item.key.startsWith('http')) {
+    item.label = (
+      <a href={item.key} target="_blank" rel="noopener noreferrer">
+        {item.label}
+      </a>
+    )
+  } else {
+    item.label = <Link to={item.key}>{item.label}</Link>
+  }
+  return item
+}

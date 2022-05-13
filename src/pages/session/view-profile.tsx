@@ -1,20 +1,21 @@
-import { appDispatch } from '#A/store'
+import { call } from '#A/store'
 import { sessionLogout } from '#F/session/slice'
+import { useOnceRequest } from '#H/use-once'
 import { IUser } from '#P/users/service'
-import { useRequest } from 'ahooks'
+import { useWhyDidYouUpdate } from 'ahooks'
 import { Alert, Button, Card } from 'antd'
 import dayjs from 'dayjs'
 import { findCurrnet } from './service'
 
 export function Profile() {
-  const { data: user, error } = useRequest(findCurrnet)
-  console.log(`render Profile: user=${user !== undefined}`)
+  const { data: user, error, ...state } = useOnceRequest(findCurrnet)
+  useWhyDidYouUpdate('Profile', { ...state, error, user })
   return (
     <Card
       title="Profile"
       style={{ width: 320 }}
       extra={
-        <Button type="link" onClick={() => appDispatch(sessionLogout())}>
+        <Button type="link" onClick={() => call(sessionLogout())}>
           Logout
         </Button>
       }

@@ -1,4 +1,4 @@
-import { appDispatch } from '#A/store'
+import { call } from '#A/store'
 import { encodePassword } from '#A/utils'
 import { sessionLogin } from '#F/session/slice'
 import { Button, Card, Form, Input, Modal, Space } from 'antd'
@@ -11,7 +11,7 @@ export function Login() {
     const encode = encodePassword(values.username, values.password)
     const form = { ...values, password: encode }
     if (onLogin) {
-      appDispatch(sessionLogin(form))
+      call(sessionLogin(form))
     } else {
       postRegister(form)
     }
@@ -19,7 +19,6 @@ export function Login() {
   const onFinishFailed = () => {
     Modal.warn({ title: 'Verification failed', content: 'Please check the form' })
   }
-  console.log(`render Login: onLogin=${onLogin}`)
   return (
     <Card title={onLogin ? 'Login' : 'Register'} style={{ width: 320 }}>
       <Form

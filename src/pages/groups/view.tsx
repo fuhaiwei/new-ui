@@ -1,3 +1,4 @@
+import { useWhyDidYouUpdate } from 'ahooks'
 import { Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
@@ -13,7 +14,7 @@ export default React.memo(ViewGroups)
 
 function ViewGroups(props: Props) {
   const { groups } = props
-  console.log(`render: ViewGroups, groups: ${groups !== undefined}`)
+  useWhyDidYouUpdate('ViewGroups', { ...props })
   return (
     <div className="ViewGroups">
       <Table dataSource={groups} pagination={{ position: ['bottomLeft'] }}>
