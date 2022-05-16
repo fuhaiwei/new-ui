@@ -2,8 +2,8 @@ import { useRequest } from 'ahooks'
 import { debounce } from 'lodash'
 import { useCallback, useEffect } from 'react'
 
-export function useOnceService(service: () => void, deps: React.DependencyList) {
-  const callback = useCallback(debounce(service, 50), [service, ...deps])
+export function useOnceService(service: () => void) {
+  const callback = useCallback(debounce(service, 50), [service])
   useEffect(callback, [callback])
 }
 

@@ -45,7 +45,7 @@ const service = () => call(sessionQuery())
 
 function App() {
   const { pathname } = useNav()
-  useOnceService(service, [])
+  useOnceService(service)
   useWhyDidYouUpdate('App', { pathname })
   return (
     <div className="App">
