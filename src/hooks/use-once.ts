@@ -10,7 +10,7 @@ export function useOnceService(service: () => void) {
 type UseRequest = typeof useRequest
 
 export const useOnceRequest: UseRequest = (service, options, plugins) => {
-  const myOptions = {
+  const myOptions: typeof options = {
     ...options,
     debounceWait: 50,
   }
