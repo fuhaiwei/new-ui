@@ -1,18 +1,17 @@
-import { useRequest } from 'ahooks'
-import { debounce } from 'lodash'
-import { useCallback, useEffect } from 'react'
+import { useDebounceEffect, useRequest } from 'ahooks'
 
 export function useOnceService(service: () => void) {
-  const callback = useCallback(debounce(service, 50), [service])
-  useEffect(callback, [callback])
+  useDebounceEffect(service, [service], {
+    wait: 50,
+  })
 }
 
 type UseRequest = typeof useRequest
 
 export const useOnceRequest: UseRequest = (service, options, plugins) => {
-  const myOptions = {
-    ...options,
+  const myOptions: typeof options = {
     debounceWait: 50,
+    ...options,
   }
   return useRequest(service, myOptions, plugins)
 }

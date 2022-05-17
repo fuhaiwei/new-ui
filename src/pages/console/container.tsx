@@ -10,6 +10,7 @@ import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
 import { allNames, allTypes, findAll, Message, Name, Search } from './service'
+import './style.scss'
 
 const typeOptions = allTypes.map((e) => ({ label: e, value: e }))
 
@@ -48,7 +49,13 @@ export function Console() {
           </Space>
         }
       />
-      <Table dataSource={msgs} rowKey="id" pagination={false}>
+      <Table
+        dataSource={msgs}
+        rowKey="id"
+        rowClassName={rowClass}
+        bordered={true}
+        pagination={false}
+      >
         <Column width={170} title="Date" key="date" render={renderDate} />
         <Column title="Type" key="Type" render={renderType} />
         <Column title="Content" key="content" render={renderContent} />
@@ -56,6 +63,10 @@ export function Console() {
       {page && <MyPagination page={page} onChange={onChange} />}
     </div>
   )
+}
+
+function rowClass(row: Message) {
+  return row.type
 }
 
 function renderDate(row: Message) {
