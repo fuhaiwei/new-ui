@@ -1,4 +1,4 @@
-import { fetchResult } from '#H/UseResult'
+import { fetchResult } from '#H/use-result'
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { message } from 'antd'
 
@@ -47,7 +47,6 @@ export const sessionLogout = createAsyncThunk('session/logout', async () => {
 
 export const sessionSlice = createSlice({
   name: 'session',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
     sessionUpdate(_, action: any) {

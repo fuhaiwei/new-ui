@@ -1,17 +1,16 @@
 import { MyHeader } from '#C/header/Header'
-import { useRequest, useSessionStorageState } from 'ahooks'
+import { useOnceRequest } from '#H/use-once'
+import { useSessionStorageState, useWhyDidYouUpdate } from 'ahooks'
 import { Radio } from 'antd'
 import { findAll } from './service'
 import ViewGroups from './view'
 
 export function Groups() {
   const [value, setValue] = useSessionStorageState('groups-value', { defaultValue: '1' })
-  const { data, ...state } = useRequest(() => findAll(value), {
+  const { data: groups, ...state } = useOnceRequest(() => findAll(value), {
     refreshDeps: [value],
-    refreshOnWindowFocus: true,
   })
-  const groups = data?.data
-  console.log(`render: Groups, loading: ${state.loading}`)
+  useWhyDidYouUpdate('Groups', { ...state, groups })
   return (
     <div className="Groups">
       <MyHeader

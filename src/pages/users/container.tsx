@@ -1,5 +1,6 @@
 import { MyHeader } from '#C/header/Header'
 import { MyPagination } from '#C/pagination/Pagination'
+import { useOnceRequest } from '#H/use-once'
 import {
   renderAccessOn,
   renderCreateOn,
@@ -9,15 +10,18 @@ import {
   renderRoles,
 } from '#P/session/view-profile'
 import useUrlState from '@ahooksjs/use-url-state'
-import { useRequest } from 'ahooks'
+import { useWhyDidYouUpdate } from 'ahooks'
 import { Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import { findAll, Search } from './service'
 
 export function Users() {
   const [search, setSearch] = useUrlState<Search>()
-  const { data, ...state } = useRequest(() => findAll(search), { refreshDeps: [search] })
+  const { data, ...state } = useOnceRequest(() => findAll(search), {
+    refreshDeps: [search],
+  })
   const { data: users, page } = data ?? {}
+  useWhyDidYouUpdate('Users', { ...search, ...state, users, page })
   return (
     <div className="Users">
       <MyHeader state={state} title="Users" />

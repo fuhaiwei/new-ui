@@ -1,4 +1,4 @@
-import { fetchResult } from '#H/UseResult'
+import { fetchResult } from '#H/use-result'
 
 export interface IUser {
   id: number

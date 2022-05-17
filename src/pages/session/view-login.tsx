@@ -1,4 +1,4 @@
-import { appDispatch } from '#A/store'
+import { call } from '#A/store'
 import { encodePassword } from '#A/utils'
 import { sessionLogin } from '#F/session/slice'
 import { Button, Card, Form, Input, Modal, Space } from 'antd'
@@ -6,24 +6,21 @@ import { useState } from 'react'
 import { postRegister } from './service'
 
 export function Login() {
-  const [onLogin, setOnLogin] = useState(true)
-
+  const [showLogin, setShowLogin] = useState(true)
   const onFinish = (values: any) => {
     const encode = encodePassword(values.username, values.password)
     const form = { ...values, password: encode }
-    if (onLogin) {
-      appDispatch(sessionLogin(form))
+    if (showLogin) {
+      call(sessionLogin(form))
     } else {
       postRegister(form)
     }
   }
-
   const onFinishFailed = () => {
     Modal.warn({ title: 'Verification failed', content: 'Please check the form' })
   }
-
   return (
-    <Card title={onLogin ? 'Login' : 'Register'} style={{ width: 320 }}>
+    <Card title={showLogin ? 'Login' : 'Register'} style={{ width: 320 }}>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -52,15 +49,15 @@ export function Login() {
         <Form.Item wrapperCol={{ span: 16 }}>
           <Space size="large">
             <Button type="primary" htmlType="submit">
-              {onLogin ? 'Login' : 'Register'}
+              {showLogin ? 'Login' : 'Register'}
             </Button>
             <Button
               type="link"
               onClick={() => {
-                setOnLogin(!onLogin)
+                setShowLogin(!showLogin)
               }}
             >
-              {onLogin ? 'toRegister' : 'toLogin'}
+              {showLogin ? 'toRegister' : 'toLogin'}
             </Button>
           </Space>
         </Form.Item>

@@ -1,10 +1,12 @@
 import { useAppSelector } from '#A/hooks'
+import { useWhyDidYouUpdate } from 'ahooks'
 import { Card, Space } from 'antd'
 import { Login } from './view-login'
 import { Profile } from './view-profile'
 
 export function Session() {
   const session = useAppSelector((state) => state.session)
+  useWhyDidYouUpdate('Session', { session })
   return (
     <div className="Session">
       <Space className="row-stretch">

@@ -2,8 +2,9 @@ import { useNav } from '#A/hooks'
 import { MyCheckbox } from '#C/checkbox/Checkbox'
 import { MyHeader } from '#C/header/Header'
 import { MyPagination } from '#C/pagination/Pagination'
-import { useSerach } from '#H/useSearch'
-import { useRequest } from 'ahooks'
+import { useOnceRequest } from '#H/use-once'
+import { useSerach } from '#H/use-search'
+import { useWhyDidYouUpdate } from 'ahooks'
 import { Radio, Space, Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
@@ -16,16 +17,14 @@ export function Console() {
   const { navigate } = useNav()
   const { name = 'SPIDER_CONTENT' } = useParams<{ name: Name }>()
   const [search, setSearch] = useSerach<Search>(undefined, { arrayNames: ['types'] })
-  const { data, ...state } = useRequest(() => findAll(name, search), {
+  const { data, ...state } = useOnceRequest(() => findAll(name, search), {
     refreshDeps: [name, search],
   })
-  const msgs = data?.data
-  const page = data?.page
-
+  const { data: msgs, page } = data || {}
   const onChange = (page: number, size: number = 20) => {
     setSearch({ page, size })
   }
-
+  useWhyDidYouUpdate('Console', { name, ...search, ...state, msgs, page })
   return (
     <div className="Console">
       <MyHeader

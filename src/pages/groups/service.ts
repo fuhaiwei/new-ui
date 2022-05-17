@@ -1,4 +1,4 @@
-import { fetchResult } from '#H/UseResult'
+import { fetchResult } from '#H/use-result'
 
 export interface IGroup {
   id: number
@@ -15,5 +15,7 @@ export function findAll(value: string) {
   let hasPrivate = false
   if (value !== '1') hasDisable = true
   if (value === '3') hasPrivate = true
-  return fetchResult<IGroup[]>(`/api/discGroups?hasDisable=${hasDisable}&hasPrivate=${hasPrivate}`)
+  return fetchResult<IGroup[]>(
+    `/api/discGroups?hasDisable=${hasDisable}&hasPrivate=${hasPrivate}`
+  ).then((result) => result.data)
 }
