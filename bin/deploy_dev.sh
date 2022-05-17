@@ -9,7 +9,7 @@ cd "$HomeDir" || exit
 
 # 构建部署
 if [[ $1 != '-q' ]]; then
-    yarn build
+    npm run build
 fi
 
 ssh q "rm -rf nginx/www/mzzb-ui-dev; mkdir -p nginx/www/mzzb-ui-dev;"
