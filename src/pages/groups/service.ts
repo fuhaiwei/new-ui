@@ -10,11 +10,11 @@ export interface IGroup {
   modifyTime?: number
 }
 
-export function findAll(value: string) {
+export function findAll(viewType: string) {
   let hasDisable = false
   let hasPrivate = false
-  if (value !== '1') hasDisable = true
-  if (value === '3') hasPrivate = true
+  if (viewType !== '1') hasDisable = true
+  if (viewType === '3') hasPrivate = true
   return fetchResult<IGroup[]>(
     `/api/discGroups?hasDisable=${hasDisable}&hasPrivate=${hasPrivate}`
   ).then((result) => result.data)
