@@ -33,9 +33,13 @@ export interface Search {
 
 export function findAll(name: Name, search: Partial<Search>) {
   const params = new URLSearchParams()
-  if (search.search) params.append('search', search.search)
-  if (search.types) params.append('types', search.types.join(','))
-  if (search.page) params.append('page', `${search.page}`)
-  if (search.size) params.append('size', `${search.size}`)
+  if (isNotEmpty(search.search)) params.append('search', search.search)
+  if (isNotEmpty(search.types)) params.append('types', search.types.join(','))
+  if (isNotEmpty(search.page)) params.append('page', `${search.page}`)
+  if (isNotEmpty(search.size)) params.append('size', `${search.size}`)
   return fetchResult<Message[]>(`/api/messages/${name}?${params}`)
+}
+
+function isNotEmpty<T>(target?: T & { length?: number }): target is T {
+  return target !== undefined && (target.length ?? 0) > 0
 }
