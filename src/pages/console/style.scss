@@ -1,0 +1,17 @@
+.Console {
+  tr.DEBUG {
+    font-style: italic;
+  }
+  tr.NOTIFY {
+    background-color: #c4e3f3;
+  }
+  tr.SUCCESS {
+    background-color: #dff0d8;
+  }
+  tr.WARNING {
+    background-color: #fcf8e3;
+  }
+  tr.ERROR {
+    background-color: #f2dede;
+  }
+}
