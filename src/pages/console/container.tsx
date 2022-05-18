@@ -60,7 +60,7 @@ export function Console() {
         bordered={true}
         pagination={false}
       >
-        <Column width={170} title="Date" key="date" render={renderDate} />
+        <Column title="Date" key="date" render={renderDate} />
         <Column title="Type" key="Type" render={renderType} />
         <Column title="Content" key="content" render={renderContent} />
       </Table>
