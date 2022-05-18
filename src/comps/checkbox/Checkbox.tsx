@@ -34,7 +34,7 @@ export function MyCheckbox(props: Props) {
       />
       {options.map((option) => (
         <Checkbox
-          key={option.value as string}
+          key={`${option.value}`}
           checked={value.includes(option.value)}
           children={option.label}
           onChange={(e) => {

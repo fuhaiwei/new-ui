@@ -1,15 +1,26 @@
 import { fetchResult } from '#H/use-result'
 
-export const allNames = [
-  'SPIDER_CONTENT',
-  'SPIDER_HISTORY',
-  'SERVER_DISC',
-  'SERVER_USER',
-  'SERVER_CORE',
-  'DEFAULT',
+export const nameOptions = [
+  { value: 'SPIDER_CONTENT', label: '排名抓取' },
+  { value: 'SPIDER_HISTORY', label: '上架抓取' },
+  { value: 'SERVER_DISC', label: '碟片日志' },
+  { value: 'SERVER_USER', label: '用户日志' },
+  { value: 'SERVER_CORE', label: '核心日志' },
+  { value: 'DEFAULT', label: '其他日志' },
 ] as const
 
-export const allTypes = ['DEBUG', 'INFO', 'NOTIFY', 'SUCCESS', 'WARNING', 'ERROR'] as const
+export const typeOptions = [
+  { value: 'DEBUG', label: '调试' },
+  { value: 'INFO', label: '信息' },
+  { value: 'NOTIFY', label: '通知' },
+  { value: 'SUCCESS', label: '成功' },
+  { value: 'WARNING', label: '警告' },
+  { value: 'ERROR', label: '错误' },
+] as const
+
+const allNames = nameOptions.map((e) => e.value)
+
+const allTypes = typeOptions.map((e) => e.value)
 
 export type Name = typeof allNames[number]
 
