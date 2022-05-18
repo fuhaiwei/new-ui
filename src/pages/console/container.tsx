@@ -70,13 +70,17 @@ function rowClass(row: Message) {
 }
 
 function renderDate(row: Message) {
-  return dayjs(row.createOn).format('YYYY-MM-DD HH:mm:ss')
+  return spanText(dayjs(row.createOn).format('YYYY-MM-DD HH:mm:ss'))
 }
 
 function renderType(row: Message) {
-  return row.type
+  return spanText(row.type)
 }
 
 function renderContent(row: Message) {
-  return row.text
+  return spanText(row.text)
+}
+
+function spanText(text: string) {
+  return <span className="text">{text}</span>
 }
