@@ -5,8 +5,8 @@ export interface IUser {
   username: string
   enabled: boolean
   roles: string[]
-  createOn: number
-  accessOn?: number
+  lastLoggedIn: number
+  registerDate?: number
 }
 
 export interface Search {

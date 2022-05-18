@@ -16,10 +16,5 @@ export function postRegister(form: RegisterForm) {
 }
 
 export function findCurrnet() {
-  return fetchResult<IUser>('/api/session/current').then((result) => {
-    const target = result.data as any
-    result.data!.accessOn = target.lastLoggedIn
-    result.data!.createOn = target.registerDate
-    return result.data
-  })
+  return fetchResult<IUser>('/api/session/current').then((result) => result.data)
 }
