@@ -61,7 +61,7 @@ export function Console() {
         pagination={false}
       >
         <Column title="Date" key="date" render={renderDate} />
-        <Column title="Type" key="Type" render={renderType} />
+        <Column title="Type" key="Type" render={renderType} className="type" />
         <Column title="Content" key="content" render={renderContent} />
       </Table>
       {page && <MyPagination page={page} onChange={onChange} />}

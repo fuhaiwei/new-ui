@@ -14,4 +14,10 @@
   tr.ERROR span.text {
     background-color: #f2dede;
   }
+
+  @media screen and (max-width: 600px) {
+    .type {
+      display: none;
+    }
+  }
 }
