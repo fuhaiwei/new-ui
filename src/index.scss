@@ -15,6 +15,12 @@
   .ant-table {
     margin: 8px 0;
   }
+  .ant-table.ant-table-bordered {
+    th,
+    td {
+      border: 1px solid rgb(221, 221, 221);
+    }
+  }
   .ant-space.row-stretch {
     align-items: stretch;
     .ant-card {
