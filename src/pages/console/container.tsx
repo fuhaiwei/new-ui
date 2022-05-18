@@ -17,7 +17,7 @@ const typeOptions = allTypes.map((e) => ({ label: e, value: e }))
 export function Console() {
   const { navigate } = useNav()
   const { name = 'SPIDER_CONTENT' } = useParams<{ name: Name }>()
-  const [search, setSearch] = useSerach<Search>(undefined, { arrayNames: ['types'] })
+  const [search, setSearch] = useSerach<Search>({ arrayNames: ['types'] })
   const { data, ...state } = useOnceRequest(() => findAll(name, search), {
     refreshDeps: [name, search],
   })
