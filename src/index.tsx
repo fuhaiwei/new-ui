@@ -1,6 +1,6 @@
-import App from '#A/App'
 import setup from '#A/setup'
 import { store } from '#A/store'
+import { App } from '#P/app/App'
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
