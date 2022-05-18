@@ -41,7 +41,9 @@ const items: ItemType[] = [
   } as any,
 ].map(defindItem)
 
-const service = () => call(sessionQuery())
+const service = () => {
+  call(sessionQuery())
+}
 
 function App() {
   const { pathname } = useNav()

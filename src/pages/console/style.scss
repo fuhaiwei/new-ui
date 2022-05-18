@@ -1,17 +1,17 @@
 .Console {
-  tr.DEBUG {
+  tr.DEBUG span.text {
     font-style: italic;
   }
-  tr.NOTIFY {
+  tr.NOTIFY span.text {
     background-color: #c4e3f3;
   }
-  tr.SUCCESS {
+  tr.SUCCESS span.text {
     background-color: #dff0d8;
   }
-  tr.WARNING {
+  tr.WARNING span.text {
     background-color: #fcf8e3;
   }
-  tr.ERROR {
+  tr.ERROR span.text {
     background-color: #f2dede;
   }
 }

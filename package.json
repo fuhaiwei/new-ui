@@ -1,6 +1,6 @@
 {
   "name": "new-ui",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "private": true,
   "proxy": "https://mingzuozhibi.com",
   "#proxy": "http://localhost:9000",
@@ -27,7 +27,8 @@
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "check": "source-map-explorer build/static/js/*.js --html > ~/downs/output.html"
   },
   "eslintConfig": {
     "extends": [
@@ -50,6 +51,7 @@
     "customize-cra": "^1.0.0",
     "react-app-rewired": "^2.2.1",
     "sass": "^1.51.0",
-    "sass-loader": "^12.6.0"
+    "sass-loader": "^12.6.0",
+    "source-map-explorer": "^2.5.2"
   }
 }

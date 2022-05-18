@@ -17,7 +17,7 @@ const typeOptions = allTypes.map((e) => ({ label: e, value: e }))
 export function Console() {
   const { navigate } = useNav()
   const { name = 'SPIDER_CONTENT' } = useParams<{ name: Name }>()
-  const [search, setSearch] = useSerach<Search>(undefined, { arrayNames: ['types'] })
+  const [search, setSearch] = useSerach<Search>({ arrayNames: ['types'] })
   const { data, ...state } = useOnceRequest(() => findAll(name, search), {
     refreshDeps: [name, search],
   })
@@ -70,13 +70,17 @@ function rowClass(row: Message) {
 }
 
 function renderDate(row: Message) {
-  return dayjs(row.createOn).format('YYYY-MM-DD HH:mm:ss')
+  return spanText(dayjs(row.createOn).format('YYYY-MM-DD HH:mm:ss'))
 }
 
 function renderType(row: Message) {
-  return row.type
+  return spanText(row.type)
 }
 
 function renderContent(row: Message) {
-  return row.text
+  return spanText(row.text)
+}
+
+function spanText(text: string) {
+  return <span className="text">{text}</span>
 }
