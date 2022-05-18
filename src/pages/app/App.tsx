@@ -24,6 +24,19 @@ const IconFont = createFromIconfontCN({
   scriptUrl: 'https://at.alicdn.com/t/font_565515_1amye10w3sh.js',
 })
 
+const routes = (
+  <Routes>
+    <Route path="/" element={<Navigate to="/groups" />} />
+    <Route path="/groups" element={<Groups />} />
+    <Route path="/session" element={<Session />} />
+    <Route path="/console" element={<Console />}>
+      <Route path=":name" element={null} />
+    </Route>
+    <Route path="/users" element={<Users />} />
+    <Route path="*" element={<NotFound />} />
+  </Routes>
+)
+
 const items: ItemType[] = [
   { label: 'Groups', icon: <IconFont type="icon-yinghua" />, key: '/groups' },
   { label: 'Session', icon: <UserOutlined />, key: '/session' },
@@ -45,7 +58,7 @@ const service = () => {
   call(sessionQuery())
 }
 
-function App() {
+export function App() {
   const { pathname } = useNav()
   useOnceService(service)
   useWhyDidYouUpdate('App', { pathname })
@@ -56,25 +69,12 @@ function App() {
           <Header style={{ background: 'white' }}>
             <Menu selectedKeys={[pathname]} mode="horizontal" items={items} />
           </Header>
-          <Content style={{ background: 'white' }}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/groups" />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/groups" element={<Groups />} />
-              <Route path="/session" element={<Session />} />
-              <Route path="/console" element={<Console />}>
-                <Route path=":name" element={null} />
-              </Route>
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Content>
+          <Content style={{ background: 'white' }}>{routes}</Content>
         </Layout>
       </Layout>
     </div>
   )
 }
-
-export default App
 
 function defindItem(item: any) {
   if (item.children) {

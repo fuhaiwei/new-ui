@@ -18,10 +18,10 @@ export function renderEnabled(row: IUser) {
 }
 
 export function renderCreateOn(row: IUser) {
-  return dayjs(row.createOn).format('YY-MM-DD HH:mm:ss')
+  return dayjs(row.registerDate).format('YY-MM-DD HH:mm:ss')
 }
 
 export function renderAccessOn(row: IUser) {
-  if (row.accessOn === undefined) return '---'
-  return dayjs(row.accessOn).format('YY-MM-DD HH:mm:ss')
+  if (row.lastLoggedIn === undefined) return '---'
+  return dayjs(row.lastLoggedIn).format('YY-MM-DD HH:mm:ss')
 }

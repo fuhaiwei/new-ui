@@ -9,10 +9,16 @@ import { Radio, Space, Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
 import { useParams } from 'react-router-dom'
-import { allNames, allTypes, findAll, Message, Name, Search } from './service'
+import { findAll, Message, Name, nameOptions, Search, typeOptions } from './service'
 import './style.scss'
 
-const typeOptions = allTypes.map((e) => ({ label: e, value: e }))
+const myTypeOptions = [...typeOptions]
+const myNameOptions = [...nameOptions]
+const typeMapping: Record<string, string> = {}
+
+typeOptions.forEach((e) => {
+  typeMapping[e.value] = e.label
+})
 
 export function Console() {
   const { navigate } = useNav()
@@ -33,17 +39,15 @@ export function Console() {
         title="Console"
         children={
           <Space direction="vertical">
-            <Radio.Group value={name} onChange={(e) => navigate(`/console/${e.target.value}`)}>
-              {allNames.map((e) => (
-                <Radio key={e} value={e}>
-                  {e}
-                </Radio>
-              ))}
-            </Radio.Group>
+            <Radio.Group
+              value={name}
+              options={myNameOptions}
+              onChange={(e) => navigate(`/console/${e.target.value}`)}
+            />
             <MyCheckbox
               allSelectText="ALL"
               value={search.types}
-              options={typeOptions}
+              options={myTypeOptions}
               onChange={(values) => setSearch({ types: values })}
             />
           </Space>
@@ -56,8 +60,8 @@ export function Console() {
         bordered={true}
         pagination={false}
       >
-        <Column width={170} title="Date" key="date" render={renderDate} />
-        <Column title="Type" key="Type" render={renderType} />
+        <Column title="Date" key="date" render={renderDate} />
+        <Column title="Type" key="Type" render={renderType} className="type" />
         <Column title="Content" key="content" render={renderContent} />
       </Table>
       {page && <MyPagination page={page} onChange={onChange} />}
@@ -74,7 +78,7 @@ function renderDate(row: Message) {
 }
 
 function renderType(row: Message) {
-  return spanText(row.type)
+  return spanText(typeMapping[row.type] ?? '未知')
 }
 
 function renderContent(row: Message) {
