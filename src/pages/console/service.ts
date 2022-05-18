@@ -1,6 +1,7 @@
+import { MyOptions } from '#A/types'
 import { fetchResult } from '#H/use-result'
 
-export const nameOptions = [
+export const nameOptions: MyOptions = [
   { value: 'SPIDER_CONTENT', label: '排名抓取' },
   { value: 'SPIDER_HISTORY', label: '上架抓取' },
   { value: 'SERVER_DISC', label: '碟片日志' },
@@ -9,7 +10,7 @@ export const nameOptions = [
   { value: 'DEFAULT', label: '其他日志' },
 ] as const
 
-export const typeOptions = [
+export const typeOptions: MyOptions = [
   { value: 'DEBUG', label: '调试' },
   { value: 'INFO', label: '信息' },
   { value: 'NOTIFY', label: '通知' },
@@ -18,13 +19,13 @@ export const typeOptions = [
   { value: 'ERROR', label: '错误' },
 ] as const
 
-const allNames = nameOptions.map((e) => e.value)
+const nameValues = nameOptions.map((e) => e.value)
 
-const allTypes = typeOptions.map((e) => e.value)
+const typeValues = typeOptions.map((e) => e.value)
 
-export type Name = typeof allNames[number]
+export type Name = typeof nameValues[number]
 
-export type Type = typeof allTypes[number]
+export type Type = typeof typeValues[number]
 
 export interface Message {
   id: number
