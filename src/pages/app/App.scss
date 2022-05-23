@@ -1,7 +1,18 @@
 @import '~antd/dist/antd.css';
 
 .App {
-  main.ant-layout-content {
+  .ant-layout-header {
+    .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item,
+    .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu {
+      padding: 0 10px;
+    }
+
+    @media screen and (max-width: 600px) {
+      padding: 0 16px;
+    }
+  }
+
+  .ant-layout-content {
     margin: 8px 0;
     padding: 0 8px 8px 8px;
 

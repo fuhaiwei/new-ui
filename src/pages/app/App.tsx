@@ -39,8 +39,8 @@ const routes = (
 
 const items: ItemType[] = [
   { label: 'Groups', icon: <IconFont type="icon-yinghua" />, key: '/groups' },
-  { label: 'Session', icon: <UserOutlined />, key: '/session' },
   { label: 'Console', icon: <BarChartOutlined />, key: '/console' },
+  { label: 'Session', icon: <UserOutlined />, key: '/session' },
   { label: 'Users', icon: <UserOutlined />, key: '/users' },
   {
     label: 'Source',
