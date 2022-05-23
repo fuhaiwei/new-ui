@@ -59,8 +59,9 @@ export function Console() {
         rowClassName={rowClass}
         bordered={true}
         pagination={false}
+        tableLayout="fixed"
       >
-        <Column title="Date" key="date" render={renderDate} />
+        <Column title="Date" key="date" render={renderDate} className="date" />
         <Column title="Type" key="Type" render={renderType} className="type" />
         <Column title="Content" key="content" render={renderContent} />
       </Table>
