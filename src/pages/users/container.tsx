@@ -18,7 +18,7 @@ export function Users() {
   return (
     <div className="Users">
       <MyHeader state={state} title="Users" />
-      <Table dataSource={users} rowKey="id">
+      <Table dataSource={users} rowKey="id" scroll={{ x: 850 }}>
         <Column title="ID" render={renders.renderId} />
         <Column title="Name" render={renders.renderName} />
         <Column title="Roles" render={renders.renderRoles} />
