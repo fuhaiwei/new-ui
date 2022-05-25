@@ -8,7 +8,7 @@ import { useWhyDidYouUpdate } from 'ahooks'
 import { Radio, Space, Table } from 'antd'
 import Column from 'antd/lib/table/Column'
 import dayjs from 'dayjs'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { findAll, Message, Name, nameOptions, Search, typeOptions } from './service'
 import './style.scss'
 
@@ -86,6 +86,19 @@ function renderContent(row: Message) {
   return spanText(row.text)
 }
 
+const regex1 = /\(([A-Z0-9]{10})\)/
+const regex2 = /\[([A-Z0-9]{10})\]/
+
 function spanText(text: string) {
+  const result = regex1.exec(text) ?? regex2.exec(text)
+  if (result) {
+    return (
+      <span className="text">
+        {text.substring(0, result.index + 1)}
+        <Link to={`/discs/asin/${result[1]}`}>{result[1]}</Link>
+        {text.substring(result.index + 11)}
+      </span>
+    )
+  }
   return <span className="text">{text}</span>
 }
