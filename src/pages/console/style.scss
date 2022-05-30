@@ -15,7 +15,17 @@
     background-color: #f2dede;
   }
 
+  .date {
+    width: 125px;
+  }
+  .type {
+    width: 75px;
+  }
+
   @media screen and (max-width: 600px) {
+    .date {
+      width: 110px;
+    }
     .type {
       display: none;
     }
