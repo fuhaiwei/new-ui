@@ -9,8 +9,9 @@ cd "$HomeDir" || exit
 
 # 构建部署
 if [[ $1 != '-q' ]]; then
-    npm run build
+    yarn build
 fi
 
-ssh q "rm -rf nginx/www/mzzb-ui-dev; mkdir -p nginx/www/mzzb-ui-dev;"
-tar -czf - -C build . | ssh q "tar -xzpvf - -C nginx/www/mzzb-ui-dev"
+target=mzzb-admin/nginx/www/dev
+ssh q "rm -rf $target; mkdir -p $target;"
+tar -czf - -C build . | ssh q "tar -xzpvf - -C $target"
