@@ -24,6 +24,13 @@
     "typescript": "^4.6.4",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "react-app-rewired": "^2.2.1",
+    "sass": "^1.51.0",
+    "sass-loader": "^12.6.0",
+    "source-map-explorer": "^2.5.2"
+  },
   "scripts": {
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
@@ -46,12 +53,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "customize-cra": "^1.0.0",
-    "react-app-rewired": "^2.2.1",
-    "sass": "^1.51.0",
-    "sass-loader": "^12.6.0",
-    "source-map-explorer": "^2.5.2"
   }
 }
