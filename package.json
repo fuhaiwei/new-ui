@@ -35,7 +35,10 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "eject": "react-scripts eject",
-    "check": "source-map-explorer build/static/js/*.js --html > ~/downs/output.html"
+    "check": "source-map-explorer build/static/js/*.js --html > ~/downs/output.html",
+    "c1": "sed -i 's/http:/https:/g' package-lock.json",
+    "c2": "sed -i 's/mirrors.cloud.tencent.com/mirrors.tencent.com/g' package-lock.json",
+    "ca": "yarn c1 && yarn c2"
   },
   "eslintConfig": {
     "extends": [
